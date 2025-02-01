@@ -1,19 +1,19 @@
 //Création de la classe utilisateur
 public class Utilisateur {
     public String role;
-    public String id;
+    public int id;
     public String nom;
     public int penalites;
     public boolean abonnement;
 
-    public Utilisateur(String id, String role, String nom){
+    public Utilisateur(int id, String role, String nom){
         this.id = id;
         this.role = role;
         this.nom = nom;
     }
 
     //Getter
-    public String getId(){
+    public int getId(){
         return id;
     }
 
@@ -56,14 +56,14 @@ public class Utilisateur {
     public String toString() {
         if(penalites>1){
             return "Utilisateur{" + 
-            "id= '" + id+'\'' +","+
+            "id= " + id +","+
             " nom= '" + nom + '\''+","+
             " rôle= '"+role+'\''+"," +
             " abonnement= " +abonnement+","+
             " pénalités= "+penalites+"}";
         }
         return "Utilisateur{" + 
-        "id= '" + id+'\'' +","+
+        "id= " + id +","+
         " nom= '" + nom + '\''+","+
         " rôle= '"+role+'\''+"," +
         " abonnement= " +abonnement+","+
