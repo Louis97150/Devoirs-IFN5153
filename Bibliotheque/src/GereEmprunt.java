@@ -15,12 +15,13 @@ public class GereEmprunt{
                     for (Ressources res : auteurs) {
                         if (res.getTitre().equalsIgnoreCase(titre)) {
                             if (res.getDispo()) {
-                                System.out.println("La ressource est disponible, inutile de la réserver.");
-                                return;
-                            } else {
                                 Emprunt nouvelleReservation = new Emprunt(res, utilisateur, jResa, retour);
+                                nouvelleReservation.setUtilise();
                                 reservations.add(nouvelleReservation);
                                 System.out.println("Ressource réservée avec succès jusqu'au " + nouvelleReservation.getDateRetour());
+                                return;
+                            } else {
+                                System.out.println("La ressource est indisponible, inutile de la réserver.");
                                 return;
                             }
                         }

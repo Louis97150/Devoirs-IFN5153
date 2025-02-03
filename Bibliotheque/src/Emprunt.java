@@ -5,6 +5,7 @@ public class Emprunt {
     public Utilisateur user;
     public Date jResa;
     public Date retour;
+    public boolean confirme;
 
     public Emprunt(Ressources ressources, Utilisateur user, Date jResa, Date retour){
         this.ressource = ressources;
@@ -27,6 +28,14 @@ public class Emprunt {
 
     public Date getDateRetour(){
         return retour;
+    }
+
+    public void setUtilise(){
+        this.confirme = false;
+    }
+
+    public void setLibre(){
+        this.confirme = true;
     }
 
 }
