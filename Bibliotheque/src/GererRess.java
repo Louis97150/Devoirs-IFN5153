@@ -8,23 +8,19 @@ public class GererRess {
     }
 
     public void ajoutRessource(String type, String titre, String auteur, String sujet, boolean dispo){
-        // Créer la nouvelle ressource
+
         Ressources nouvelleRessource = new Ressources(titre, auteur, type, sujet, dispo);
-    
-        // Utiliser computeIfAbsent sur la map 'ressource' (et non sur une instance de Ressources)
+
         Map<String, Map<String, List<Ressources>>> types = ressource.computeIfAbsent(type, k -> new HashMap<>());
         Map<String, List<Ressources>> sujets = types.computeIfAbsent(sujet, k -> new HashMap<>());
         List<Ressources> ressourcesParAuteur = sujets.computeIfAbsent(auteur, k -> new ArrayList<>());
     
-        // Vérifier si la ressource existe déjà
         boolean existeDeja = ressourcesParAuteur.stream().anyMatch(r ->r.getTitre().equalsIgnoreCase(titre));
     
         if (!existeDeja) {
-            // Ajouter la ressource si elle n'existe pas déjà
             ressourcesParAuteur.add(nouvelleRessource);
             System.out.println("La ressource a bien été ajoutée.");
         } else {
-            // Ne pas ajouter la ressource si elle existe déjà
             System.out.println("La ressource n'a pas été ajoutée car elle existe déjà.");
         }
     }

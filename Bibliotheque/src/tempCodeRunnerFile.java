@@ -1,1 +1,0 @@
-        test.modifRess("titre", "nsujet", "nauteur", "ntype", "ntitre", false);
