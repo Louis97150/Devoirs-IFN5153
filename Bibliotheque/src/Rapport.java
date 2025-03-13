@@ -7,7 +7,6 @@ public class Rapport {
         this.emprunts = emprunts;
     }
 
-    // Générer un rapport des ressources les plus empruntées
     public void genererRapportRessourcesEmpruntees() {
         Map<String, Integer> statistiques = new HashMap<>();
 
@@ -22,7 +21,6 @@ public class Rapport {
             .forEach(entry -> System.out.println(entry.getKey() + " : " + entry.getValue() + " emprunts"));
     }
 
-    // Suivi des statistiques d'utilisation des ressources
     public void genererStatistiquesUtilisation() {
         Map<String, List<Integer>> statistiquesUtilisation = new HashMap<>();
 
