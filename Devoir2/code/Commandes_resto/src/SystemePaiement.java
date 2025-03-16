@@ -1,5 +1,5 @@
 class SystemePaiement{
-    public SystemePaiement instance;
+    public static SystemePaiement instance;
     public ProcesseurPaiement processeur;
     public Facturation facture;
 
@@ -8,7 +8,7 @@ class SystemePaiement{
         this.facture = new FactureSimple();
     }
 
-    public SystemePaiement getInstance(){
+    public static SystemePaiement getInstance(){
         if(instance == null){
             instance = new SystemePaiement();
         }
