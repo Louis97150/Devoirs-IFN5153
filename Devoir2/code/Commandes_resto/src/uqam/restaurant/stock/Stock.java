@@ -10,44 +10,59 @@ public class Stock {
 
     private Stock() {
         this.mapIngredients = new HashMap<>();
-        mapIngredients.put("tomate", 1);
-        mapIngredients.put("fromage", 3);
-        mapIngredients.put("poulet", 5);
+        remplirStock();
     }
 
     
     public static Stock getInstance() {
         if (instance == null) {
             instance = new Stock();
+            
         }
         return instance;
     }
 
-    
-    public boolean confirmerIngredientExiste(String ingredientNom) {
-        return mapIngredients.containsKey(ingredientNom);
+    //Fonction pour remplir le stock quand on initialise le Singleton
+    private void remplirStock() {
+        this.ajouterIngredient("tomate", 15);
+        this.ajouterIngredient("fromage", 13);
+        this.ajouterIngredient("poulet", 15);
+        this.ajouterIngredient("laitue", 20);
+        this.ajouterIngredient("concombre", 17);
+        this.ajouterIngredient("steak", 25);
+        this.ajouterIngredient("creme glace", 13);
+        this.ajouterIngredient("mozzarella", 15);
+        this.ajouterIngredient("basilic", 15);
+        this.ajouterIngredient("pate pizza", 20);
+        this.ajouterIngredient("sauce tomate", 15);
+        this.ajouterIngredient("oeuf", 30);
+        this.ajouterIngredient("sucre", 25);
+        this.ajouterIngredient("mascarpone", 12);
+        this.ajouterIngredient("miso", 15);
+        this.ajouterIngredient("oignon", 10);
+        this.ajouterIngredient("dashi", 9);
+        this.ajouterIngredient("champignon", 15);
+        this.ajouterIngredient("riz", 30);
+        this.ajouterIngredient("brocoli", 21);
+        this.ajouterIngredient("pain", 34);
     }
 
     
-    public Map<String, Integer> getMapIngredients() {
-        return new HashMap<>(mapIngredients); 
-    }
-
-    
-    public void miseAJourIngredientQuantite(String ingredientNom, int updateMontant) {
-        if (mapIngredients.containsKey(ingredientNom)) {
-            int nouvelleQuantite = mapIngredients.get(ingredientNom) + updateMontant;
+    public void miseAJourIngredientQuantite(String ingredientNom, int updateMontant) throws IllegalStateException, IllegalArgumentException {
+        if (mapIngredients.containsKey(ingredientNom.toLowerCase())) {
+            int nouvelleQuantite = mapIngredients.get(ingredientNom.toLowerCase()) + updateMontant;
             if (nouvelleQuantite <= 0) {
-                throw new IllegalStateException("Stock insuffisant pour " + ingredientNom);
+                throw new IllegalStateException("Stock insuffisant pour " + ingredientNom.toLowerCase());
             }
-            mapIngredients.put(ingredientNom, nouvelleQuantite);
+            System.out.println(ingredientNom.toLowerCase() + ": " + mapIngredients.get(ingredientNom.toLowerCase()) + " -> " + nouvelleQuantite);
+            mapIngredients.put(ingredientNom.toLowerCase(), nouvelleQuantite);
         } else {
-            throw new IllegalArgumentException("Ingrédient " + ingredientNom + " non trouvé.");
+            throw new IllegalArgumentException("Ingrédient " + ingredientNom.toLowerCase() + " non trouvé.");
         }
     }
 
     public void retirerIngredient(String ingredientNom) {
-        mapIngredients.remove(ingredientNom);
+        mapIngredients.remove(ingredientNom.toLowerCase());
     }
 
     
@@ -55,7 +70,7 @@ public class Stock {
         if (quantite <= 0) {
             throw new IllegalArgumentException("La quantité doit être 0 ou plus.");
         }
-        mapIngredients.put(ingredientNom, quantite);
+        mapIngredients.put(ingredientNom.toLowerCase(), quantite);
     }
 
     public int getQuantiteIngredient(String nom) {

@@ -2,7 +2,9 @@ package uqam.restaurant.commande;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Commande {
     private String idCommande;
@@ -19,6 +21,11 @@ public class Commande {
         this.listeItems = new ArrayList<>();
     }
 
+    private double calculerPrixTotal() {
+        this.prixTotal = listeItems.stream().mapToDouble(Menu::getPrix).sum();
+        return prixTotal;
+    }
+
     public void ajouterItem(Menu item) {
         listeItems.add(item);
         calculerPrixTotal();
@@ -28,13 +35,25 @@ public class Commande {
         this.etat = nouvelEtat;
     }
 
-    public double calculerPrixTotal() {
-        this.prixTotal = listeItems.stream().mapToDouble(Menu::getPrix).sum();
-        return prixTotal;
-    }
-
     public List<Menu> getListeItems() {
         return new ArrayList<>(listeItems);
+    }
+
+    public Map<String, Integer> getListeIngredients() {
+        Map<String, Integer> mapIngredients = new HashMap<>();
+        for (Menu item : listeItems) {
+            item.getIngredients().forEach((ingredient, quantite) -> {
+                if (mapIngredients.containsKey(ingredient)) {
+                    mapIngredients.put(ingredient, quantite + mapIngredients.get(ingredient));
+                } else {
+                    mapIngredients.put(ingredient, quantite);
+                }
+                
+            });
+            
+        }
+
+        return mapIngredients;
     }
 
     public double getPrixTotal() {
