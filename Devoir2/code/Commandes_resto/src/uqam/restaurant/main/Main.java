@@ -14,7 +14,7 @@ public class Main {
 
         
         MenuFactory factory = new MenuItalienFactory();
-        MenuCompose menuItalien = new MenuCompose("Menu Italien", 5.0); // Remise de 5$
+        MenuCompose menuItalien = new MenuCompose("Menu Italien", 5.0); 
         menuItalien.ajouterItem(factory.creerEntree());
         menuItalien.ajouterItem(factory.creerPlatPrincipal());
         menuItalien.ajouterItem(factory.creerDessert());
