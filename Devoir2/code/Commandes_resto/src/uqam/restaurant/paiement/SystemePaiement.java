@@ -15,7 +15,7 @@ public class SystemePaiement {
         return instance;
     }
 
-    public void setProcesseurPaiement(ProcesseurPaiement processeurPaiement) {
+    private void setProcesseurPaiement(ProcesseurPaiement processeurPaiement) {
         this.processeurPaiement = processeurPaiement;
     }
 

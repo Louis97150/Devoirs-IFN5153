@@ -14,12 +14,22 @@ public class FacadeResto {
         this.paiement = SystemePaiement.getInstance();
     }
 
-    public void majStock() {
+    public void verfierStock() throws IllegalStateException {
         if (commande != null) {
-            for (var item : commande.getListeItems()) {
-                item.getIngredients().forEach((ingredient, quantite) -> {
-                    stock.miseAJourIngredientQuantite(ingredient, -quantite);
-                });
+            for (var item : commande.getListeIngredients().entrySet()) {
+                if (stock.getQuantiteIngredient(item.getKey().toLowerCase()) < item.getValue()) {
+                    throw new IllegalStateException("Stock insuffisant pour " + item.getKey().toLowerCase());
+                }
+            }
+
+            commande.changerEtat("valide");
+        }
+    }
+
+    public void majStock() throws IllegalStateException, IllegalArgumentException{
+        if (commande != null) {
+            for (var item : commande.getListeIngredients().entrySet()) {
+                stock.miseAJourIngredientQuantite(item.getKey().toLowerCase(), -item.getValue());
             }
         }
     }
@@ -34,5 +44,9 @@ public class FacadeResto {
 
     public Commande getCommande() {
         return commande;
+    }
+
+    public Stock getStock() {
+        return this.stock;
     }
 }

@@ -8,9 +8,4 @@ public abstract class Supplement implements Menu {
     public Supplement(Menu platDecore) {
         this.platDecore = platDecore;
     }
-
-    @Override
-    public Map<String, Integer> getIngredients() {
-        return platDecore.getIngredients();
-    }
 }
